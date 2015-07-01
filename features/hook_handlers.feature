@@ -59,7 +59,7 @@ Feature: Hook handlers
 
       """
 
-    When I run `dredd ./apiary.apib http://localhost:4567 --server "ruby server.rb" --language ruby --hookfiles ./hookfile.rb`
+    When I run `dredd ./apiary.apib http://localhost:4567 --server "ruby server.rb" --language dredd-hooks-ruby --hookfiles ./hookfile.rb`
     Then the exit status should be 0
     Then the output should contain:
       """
