@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/apiaryio/dredd-hooks-template.svg?branch=master)](https://travis-ci.org/apiaryio/dredd-hooks-template)
+
 # Ruby Hooks Handler for Dredd API Testing Framework
 
 Write [Dredd](https://github.com/apiaryio/dredd) [hooks](http://dredd.readthedocs.org/en/latest/hooks/) in Ruby to glue together API Blueprint with your Ruby project
