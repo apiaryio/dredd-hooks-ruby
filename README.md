@@ -1,4 +1,4 @@
-# Ruby Hooks Worker for Dredd API Testing Framework
+# Ruby Hooks Handler for Dredd API Testing Framework
 
 Write [Dredd](https://github.com/apiaryio/dredd) [hooks](http://dredd.readthedocs.org/en/latest/hooks/) in Ruby to glue together API Blueprint with your Ruby project
 
