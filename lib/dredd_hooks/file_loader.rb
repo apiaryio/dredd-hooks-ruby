@@ -1,4 +1,4 @@
-module DreddWorker
+module DreddHooks
   module FileLoader
     def self.unique_paths globs
       paths = []

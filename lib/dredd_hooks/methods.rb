@@ -1,5 +1,5 @@
-module DreddWorker
-  module Hooks
+module DreddHooks
+  module Methods
     @@before_hooks = {}
     @@before_validation_hooks = {}
     @@after_hooks = {}

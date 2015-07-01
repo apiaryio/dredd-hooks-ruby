@@ -1,7 +1,7 @@
 require 'socket'
 require 'json'
 
-module DreddWorker
+module DreddHooks
   class Server
     #
     # The hooks worker server
@@ -18,26 +18,26 @@ module DreddWorker
       data = message['data']
 
       if event == "before"
-        data = DreddWorker::Runner.run_before_each_hooks_for_transaction data
-        data = DreddWorker::Runner.run_before_hooks_for_transaction data
+        data = DreddHooks::Runner.run_before_each_hooks_for_transaction data
+        data = DreddHooks::Runner.run_before_hooks_for_transaction data
       end
 
       if event == "beforeValidation"
-        data = DreddWorker::Runner.run_before_each_validation_hooks_for_transaction data
-        data = DreddWorker::Runner.run_before_validation_hooks_for_transaction data
+        data = DreddHooks::Runner.run_before_each_validation_hooks_for_transaction data
+        data = DreddHooks::Runner.run_before_validation_hooks_for_transaction data
       end
 
       if event == "after"
-        data = DreddWorker::Runner.run_after_hooks_for_transaction data
-        data = DreddWorker::Runner.run_after_each_hooks_for_transaction data
+        data = DreddHooks::Runner.run_after_hooks_for_transaction data
+        data = DreddHooks::Runner.run_after_each_hooks_for_transaction data
       end
 
       if event == "beforeAll"
-        data = DreddWorker::Runner.run_before_all_hooks_for_transactions data
+        data = DreddHooks::Runner.run_before_all_hooks_for_transactions data
       end
 
       if event == "afterAll"
-        data = DreddWorker::Runner.run_after_all_hooks_for_transactions data
+        data = DreddHooks::Runner.run_after_all_hooks_for_transactions data
       end
 
       to_send = {

@@ -1,6 +1,6 @@
 # Ruby Hooks Worker for Dredd API Testing Framework
 
-Write [Dredd](https://github.com/apiaryio/dredd) [hooks](https://github.com/apiaryio/dredd) in Ruby to glue together API Blueprint with your Ruby project
+Write [Dredd](https://github.com/apiaryio/dredd) [hooks](http://dredd.readthedocs.org/en/latest/hooks/) in Ruby to glue together API Blueprint with your Ruby project
 
 ## Installation
 
@@ -16,14 +16,14 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install dredd_worker
+    $ gem install dredd_hooks
 
 ## Usage
 
 1. Create a hook file in `hooks.rb`:
 
 ```ruby
-include DreddWorker::Hooks
+include DreddHooks::Methods
 
 before "Machines > Machines collection > Get Machines" do |transaction|
   transaction['skip'] = "true"
@@ -38,7 +38,7 @@ $ dredd apiary.apib localhost:3000 --language ruby --hookfiles hooks.rb
 
 ## API
 
-Module `DreddWorker::Hooks` mixes in following methods `before`, `after`, `before_all`, `after_all`, `before_each`, `after_each`, `before_validation`, `before_each_validation`
+Module `DreddHooks::Methods` mixes in following methods `before`, `after`, `before_all`, `after_all`, `before_each`, `after_each`, `before_validation`, `before_each_validation`
 
 `before`, `before_validation` `after` hooks are identified by [transaction name](http://dredd.readthedocs.org/en/latest/hooks/#getting-transaction-names).
 
