@@ -17,17 +17,17 @@ module DreddHooks
       event = message['event']
       data = message['data']
 
-      if event == "before"
+      if event == "beforeEach"
         data = DreddHooks::Runner.run_before_each_hooks_for_transaction data
         data = DreddHooks::Runner.run_before_hooks_for_transaction data
       end
 
-      if event == "beforeValidation"
+      if event == "beforeEachValidation"
         data = DreddHooks::Runner.run_before_each_validation_hooks_for_transaction data
         data = DreddHooks::Runner.run_before_validation_hooks_for_transaction data
       end
 
-      if event == "after"
+      if event == "afterEach"
         data = DreddHooks::Runner.run_after_hooks_for_transaction data
         data = DreddHooks::Runner.run_after_each_hooks_for_transaction data
       end
