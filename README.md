@@ -3,7 +3,7 @@
 
 [![Build Status](https://travis-ci.org/apiaryio/dredd-hooks-ruby.svg?branch=master)](https://travis-ci.org/apiaryio/dredd-hooks-ruby)
 
-Test your api with [Dredd API testing framework](https://github.com/apiaryio/dredd) and write [hooks](http://dredd.readthedocs.org/en/latest/hooks/) in Ruby to glue together API Blueprint with your Ruby project.
+Test your api with [Dredd HTTP API testing framework](https://github.com/apiaryio/dredd) and write [hooks](http://dredd.readthedocs.org/en/latest/hooks/) in Ruby to glue together API Blueprint with your Ruby project.
 
 ## Installation
 
