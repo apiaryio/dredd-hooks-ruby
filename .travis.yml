@@ -1,6 +1,6 @@
 language: ruby
 before_install:
-  - npm install -g dredd@unstable
+  - npm install -g dredd
 
 rvm:
   - 1.9.3
