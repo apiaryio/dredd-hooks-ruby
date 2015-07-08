@@ -36,7 +36,7 @@ end
 2. Run it with Dredd
 
 ```
-$ dredd apiary.apib localhost:3000 --language ruby --hookfiles hooks.rb
+$ dredd apiary.apib localhost:3000 --language ruby --hookfiles ./hooks.rb
 ```
 
 ## API
