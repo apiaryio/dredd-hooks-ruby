@@ -10,7 +10,7 @@ Test your api with [Dredd HTTP API testing framework](https://github.com/apiaryi
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'dredd_worker'
+gem 'dredd_hooks'
 ```
 
 And then execute:
