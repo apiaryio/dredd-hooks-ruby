@@ -1,9 +1,9 @@
-language: ruby
+sudo: false
+language: "ruby"
 before_install:
-  - npm install -g dredd
-
+  - "npm install -g dredd"
 rvm:
-  - 1.9.3
-  - 2.2.0
-
-script: bundle exec cucumber
+  - "1.9.3"
+  - "2.2.0"
+script:
+  - "bundle exec cucumber"
