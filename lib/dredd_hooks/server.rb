@@ -17,35 +17,35 @@ module DreddHooks
 
     def process_message message, client
       event = message['event']
-      data = message['data']
+      transaction = message['data']
 
       if event == "beforeEach"
-        data = DreddHooks::Runner.run_before_each_hooks_for_transaction data
-        data = DreddHooks::Runner.run_before_hooks_for_transaction data
+        transaction = DreddHooks::Runner.run_before_each_hooks_for_transaction(transaction)
+        transaction = DreddHooks::Runner.run_before_hooks_for_transaction(transaction)
       end
 
       if event == "beforeEachValidation"
-        data = DreddHooks::Runner.run_before_each_validation_hooks_for_transaction data
-        data = DreddHooks::Runner.run_before_validation_hooks_for_transaction data
+        transaction = DreddHooks::Runner.run_before_each_validation_hooks_for_transaction(transaction)
+        transaction = DreddHooks::Runner.run_before_validation_hooks_for_transaction(transaction)
       end
 
       if event == "afterEach"
-        data = DreddHooks::Runner.run_after_hooks_for_transaction data
-        data = DreddHooks::Runner.run_after_each_hooks_for_transaction data
+        transaction = DreddHooks::Runner.run_after_hooks_for_transaction(transaction)
+        transaction = DreddHooks::Runner.run_after_each_hooks_for_transaction(transaction)
       end
 
       if event == "beforeAll"
-        data = DreddHooks::Runner.run_before_all_hooks_for_transactions data
+        transaction = DreddHooks::Runner.run_before_all_hooks_for_transaction(transaction)
       end
 
       if event == "afterAll"
-        data = DreddHooks::Runner.run_after_all_hooks_for_transactions data
+        transaction = DreddHooks::Runner.run_after_all_hooks_for_transaction(transaction)
       end
 
       to_send = {
         "uuid" => message['uuid'],
         "event" => event,
-        "data" => data
+        "data" => transaction
       }.to_json
       client.puts to_send + "\n"
     end
