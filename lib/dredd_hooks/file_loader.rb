@@ -1,10 +1,5 @@
 module DreddHooks
   module FileLoader
-    def self.unique_paths(patterns)
-      patterns.inject([]) { |paths, pattern|
-        paths += Dir.glob(pattern)
-      }.uniq
-    end
 
     def self.load(patterns)
       self.unique_paths(patterns).each do |path|
@@ -12,6 +7,14 @@ module DreddHooks
         require path
       end
     end
+
+    private
+
+      def self.unique_paths(patterns)
+        patterns.inject([]) { |paths, pattern|
+          paths += Dir.glob(pattern)
+        }.uniq
+      end
   end
 end
 
