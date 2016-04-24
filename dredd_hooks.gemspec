@@ -9,17 +9,16 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Adam Kliment", "Gonzalo Bulnes Guilpain"]
   spec.email         = ["adam@apiary.io", "gon.bulnes@gmail.com"]
   spec.summary       = %q{Ruby Hooks Handler for Dredd API Testing Framework}
-  spec.description   = %q{Write Dredd hooks in Ruby to glue together API Blueprint with your Ruby project}
+  spec.description   = %q{Write Dredd hooks in Ruby to glue together API Blueprint with your Ruby project.}
   spec.homepage      = "https://github.com/apiaryio/dredd-hooks-ruby"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ["lib"]
+  spec.executables   = "dredd-hooks-ruby"
+  spec.files         = Dir["{bin,lib}/**/*", "CHANGELOG.md", "Gemfile", "LICENSE.txt", "Rakefile", "README.md" ]
+  spec.test_files    = Dir["features/**/*"]
 
+  spec.add_development_dependency "aruba", "~> 0.6.2"
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "aruba", "~> 0.6.2"
   spec.add_development_dependency "sinatra", "~> 1.4.5"
 end
