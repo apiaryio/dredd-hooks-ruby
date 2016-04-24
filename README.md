@@ -39,13 +39,22 @@ end
 $ dredd apiary.apib localhost:3000 --language ruby --hookfiles ./hooks.rb
 ```
 
-## API
+## Documentation
+
+### API
 
 Module `DreddHooks::Methods` mixes in following methods `before`, `after`, `before_all`, `after_all`, `before_each`, `after_each`, `before_validation`, `before_each_validation`
 
 `before`, `before_validation` `after` hooks are identified by [transaction name](http://dredd.readthedocs.org/en/latest/hooks/#getting-transaction-names).
 
 Usage is very similar to [sync JS hooks API](http://dredd.readthedocs.org/en/latest/hooks/#sync-api)
+
+### Change log
+
+Releases are commented to provide a [brief change log][releases], details can be found in the [`CHANGELOG`][changelog] file.
+
+  [releases]: https://github.com/gonzalo-bulnes/dredd-hooks-ruby/releases
+  [changelog]: ./CHANGELOG.md
 
 ## Development
 
