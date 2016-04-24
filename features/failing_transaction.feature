@@ -23,6 +23,7 @@ Feature: Failing a transacstion
   Scenario:
     Given a file named "hookfile.rb" with:
       """
+      require 'dredd_hooks/methods'
       include DreddHooks::Methods
       before("/message > GET") do |transaction|
         transaction['fail'] = "Yay! Failed in ruby!"

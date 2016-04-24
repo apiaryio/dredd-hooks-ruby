@@ -23,6 +23,7 @@ Feature: Execution order
   Scenario:
     Given a file named "hookfile.rb" with:
       """
+      require 'dredd_hooks/methods'
       include DreddHooks::Methods
 
       key = 'hooks_modifications'

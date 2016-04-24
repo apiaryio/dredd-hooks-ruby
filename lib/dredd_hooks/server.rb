@@ -1,6 +1,8 @@
 require 'socket'
 require 'json'
 
+require 'dredd_hooks/runner'
+
 module DreddHooks
   class Server
     #

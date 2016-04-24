@@ -1,3 +1,5 @@
+require 'dredd_hooks/methods'
+
 module DreddHooks
   module Runner
 
