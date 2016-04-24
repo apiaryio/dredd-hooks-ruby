@@ -9,33 +9,27 @@ module DreddHooks
 
     def self.run_before_hooks_for_transaction transaction
       transaction_name = transaction["name"]
-      hooks = Methods.class_variable_get("@@before_hooks")[transaction_name]
-      if hooks.kind_of? Array
-        hooks.each do |hook_proc|
-          hook_proc.call transaction
-        end
+      hooks = Methods.class_variable_get("@@before_hooks")[transaction_name] || []
+      hooks.each do |hook_proc|
+        hook_proc.call transaction
       end
       return transaction
     end
 
     def self.run_before_validation_hooks_for_transaction transaction
       transaction_name = transaction["name"]
-      hooks = Methods.class_variable_get("@@before_validation_hooks")[transaction_name]
-      if hooks.kind_of? Array
-        hooks.each do |hook_proc|
-          hook_proc.call transaction
-        end
+      hooks = Methods.class_variable_get("@@before_validation_hooks")[transaction_name] || []
+      hooks.each do |hook_proc|
+        hook_proc.call transaction
       end
       return transaction
     end
 
     def self.run_after_hooks_for_transaction transaction
       transaction_name = transaction["name"]
-      hooks = Methods.class_variable_get("@@after_hooks")[transaction_name]
-      if hooks.kind_of? Array
-        hooks.each do |hook_proc|
-          hook_proc.call transaction
-        end
+      hooks = Methods.class_variable_get("@@after_hooks")[transaction_name] || []
+      hooks.each do |hook_proc|
+        hook_proc.call transaction
       end
       return transaction
     end
