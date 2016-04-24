@@ -1,11 +1,12 @@
-
-# Ruby Hooks Handler for Dredd API Testing Framework
+Ruby Hooks Handler for Dredd API Testing Framework
+==================================================
 
 [![Build Status](https://travis-ci.org/apiaryio/dredd-hooks-ruby.svg?branch=master)](https://travis-ci.org/apiaryio/dredd-hooks-ruby)
 
-Test your api with [Dredd HTTP API testing framework](https://github.com/apiaryio/dredd) and write [hooks](http://dredd.readthedocs.org/en/latest/hooks/) in Ruby to glue together API Blueprint with your Ruby project.
+Test your API with the [Dredd HTTP API testing framework](https://github.com/apiaryio/dredd) and write [hooks](http://dredd.readthedocs.org/en/latest/hooks/) in Ruby!
 
-## Installation
+Installation
+------------
 
 Add the gem to your `Gemfile`:
 
@@ -15,11 +16,14 @@ Add the gem to your `Gemfile`:
 gem 'dredd_hooks', '0.1.0' # see semver.org
 ```
 
-## Usage
+Usage
+-----
 
-1. Create a hook file in `hooks.rb`:
+Create a hook file (name is arbitrary):
 
 ```ruby
+# ./hooks.rb
+
 include DreddHooks::Methods
 
 before "Machines > Machines collection > Get Machines" do |transaction|
@@ -27,30 +31,47 @@ before "Machines > Machines collection > Get Machines" do |transaction|
 end
 ```
 
-2. Run it with Dredd
+Run it with Dredd:
 
-```
-$ dredd apiary.apib localhost:3000 --language ruby --hookfiles ./hooks.rb
+```bash
+# note that the hooks file was named ./hooks.rb
+dredd apiary.apib localhost:3000 --language ruby --hookfiles ./hooks.rb
 ```
 
-## Documentation
+Documentation
+-------------
 
 ### API
 
-Module `DreddHooks::Methods` mixes in following methods `before`, `after`, `before_all`, `after_all`, `before_each`, `after_each`, `before_validation`, `before_each_validation`
+The `DreddHooks::Methods` module provides the following methods to be used with [transaction names][doc-names].
 
-`before`, `before_validation` `after` hooks are identified by [transaction name](http://dredd.readthedocs.org/en/latest/hooks/#getting-transaction-names).
+- `before`
+- `after`
+- `before_validation`
 
-Usage is very similar to [sync JS hooks API](http://dredd.readthedocs.org/en/latest/hooks/#sync-api)
+And these ones to be used without them:
 
-### Change log
+- `before_all`
+- `after_all`
+- `before_each`
+- `after_each`
+- `before_each_validation`
+
+See also the official [Hooks documentation][doc-hooks].
+
+  [doc-names]: http://dredd.readthedocs.org/en/latest/hooks/#getting-transaction-names
+  [doc-hooks]: https://dredd.readthedocs.org/en/latest/hooks
+
+Change log
+----------
 
 Releases are commented to provide a [brief change log][releases], details can be found in the [`CHANGELOG`][changelog] file.
 
   [releases]: https://github.com/gonzalo-bulnes/dredd-hooks-ruby/releases
   [changelog]: ./CHANGELOG.md
 
-## Development
+Development
+-----------
 
 ### Testing
 
@@ -59,15 +80,17 @@ Releases are commented to provide a [brief change log][releases], details can be
 rake
 ```
 
-## Contributing
+Contributing
+------------
 
 1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+1. Create your feature branch (`git checkout -b my-new-feature`)
+1. Commit your changes (`git commit -am 'Add some feature'`)
+1. Push to the branch (`git push origin my-new-feature`)
+1. Create a new Pull Request
 
-## License
+License
+-------
 
 See [`LICENSE`][license].
 
