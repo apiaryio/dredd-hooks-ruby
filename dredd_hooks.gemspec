@@ -6,8 +6,8 @@ require 'dredd_hooks/version'
 Gem::Specification.new do |spec|
   spec.name          = "dredd_hooks"
   spec.version       = DreddHooks::VERSION
-  spec.authors       = ["Adam Kliment"]
-  spec.email         = ["adam@apiary.io"]
+  spec.authors       = ["Adam Kliment", "Gonzalo Bulnes Guilpain"]
+  spec.email         = ["adam@apiary.io", "gon.bulnes@gmail.com"]
   spec.summary       = %q{Ruby Hooks Handler for Dredd API Testing Framework}
   spec.description   = %q{Write Dredd hooks in Ruby to glue together API Blueprint with your Ruby project}
   spec.homepage      = "https://github.com/apiaryio/dredd-hooks-ruby"
