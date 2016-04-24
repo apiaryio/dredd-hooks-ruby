@@ -13,6 +13,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Started using the Semantic Versioning convention
 
+### Fixed
+
+- The test suite can be used locally (it is a workaround only)
+
 ## 0.0.1 - 2015-07-07
 
 ### Added
