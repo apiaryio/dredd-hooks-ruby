@@ -19,10 +19,12 @@ gem 'dredd_hooks', '0.1.0' # see semver.org
 Usage
 -----
 
-Create a hook file (name is arbitrary):
+Create a hook file (the file name is arbitrary):
 
 ```ruby
 # ./hooks.rb
+
+require 'dredd_hooks/methods'
 
 include DreddHooks::Methods
 
@@ -43,7 +45,7 @@ Documentation
 
 ### API
 
-The `DreddHooks::Methods` module provides the following methods to be used with [transaction names][doc-names].
+The `DreddHooks::Methods` module provides the following methods to be used with [transaction names][doc-names]:
 
 - `before`
 - `after`
