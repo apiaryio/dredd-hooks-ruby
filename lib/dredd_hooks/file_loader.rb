@@ -6,8 +6,8 @@ module DreddHooks
       }.uniq
     end
 
-    def self.load globs
-      self.unique_paths(globs).each do |path|
+    def self.load(patterns)
+      self.unique_paths(patterns).each do |path|
         puts path
         require path
       end
