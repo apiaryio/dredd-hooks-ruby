@@ -13,8 +13,6 @@ module DreddHooks
     PORT = 61321
     MESSAGE_DELIMITER = "\n"
 
-    @server = nil
-
     def process_message message, client
       event = message['event']
       transaction = message['data']
