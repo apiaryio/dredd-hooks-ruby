@@ -33,7 +33,16 @@ GEM
     rack-protection (1.5.3)
       rack
     rake (10.5.0)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.4)
+      rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
@@ -51,4 +60,5 @@ DEPENDENCIES
   bundler (~> 1.6)
   dredd_hooks!
   rake (~> 10.0)
+  rspec (~> 3.0)
   sinatra (~> 1.4.5)
