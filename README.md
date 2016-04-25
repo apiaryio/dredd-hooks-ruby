@@ -97,6 +97,7 @@ Run `rake spec:public` to print the gem public documentation.
 
   [cucumber]: https://github.com/cucumber/cucumber-rails
   [rspec]: https://www.relishapp.com/rspec
+  [tags]: https://www.relishapp.com/rspec/rspec-core/v/3-4/docs/command-line/tag-option
   [travis]: https://travis-ci.org/gonzalo-bulnes/simple_token_authentication/builds
 
 Contributing
