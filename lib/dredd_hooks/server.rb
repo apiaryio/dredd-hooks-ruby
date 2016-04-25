@@ -8,12 +8,16 @@ module DreddHooks
   # The hooks worker server
   class Server
 
+    attr_reader :runner
+    private :runner
+
     HOST = '127.0.0.1'
     PORT = 61321
     MESSAGE_DELIMITER = "\n"
 
     def initialize
       @server = TCPServer.new HOST, PORT
+      @runner = Runner.new
     end
 
     def process_message message, client
@@ -21,26 +25,26 @@ module DreddHooks
       transaction = message['data']
 
       if event == "beforeEach"
-        transaction = DreddHooks::Runner.run_before_each_hooks_for_transaction(transaction)
-        transaction = DreddHooks::Runner.run_before_hooks_for_transaction(transaction)
+        transaction = runner.run_before_each_hooks_for_transaction(transaction)
+        transaction = runner.run_before_hooks_for_transaction(transaction)
       end
 
       if event == "beforeEachValidation"
-        transaction = DreddHooks::Runner.run_before_each_validation_hooks_for_transaction(transaction)
-        transaction = DreddHooks::Runner.run_before_validation_hooks_for_transaction(transaction)
+        transaction = runner.run_before_each_validation_hooks_for_transaction(transaction)
+        transaction = runner.run_before_validation_hooks_for_transaction(transaction)
       end
 
       if event == "afterEach"
-        transaction = DreddHooks::Runner.run_after_hooks_for_transaction(transaction)
-        transaction = DreddHooks::Runner.run_after_each_hooks_for_transaction(transaction)
+        transaction = runner.run_after_hooks_for_transaction(transaction)
+        transaction = runner.run_after_each_hooks_for_transaction(transaction)
       end
 
       if event == "beforeAll"
-        transaction = DreddHooks::Runner.run_before_all_hooks_for_transaction(transaction)
+        transaction = runner.run_before_all_hooks_for_transaction(transaction)
       end
 
       if event == "afterAll"
-        transaction = DreddHooks::Runner.run_after_all_hooks_for_transaction(transaction)
+        transaction = runner.run_after_all_hooks_for_transaction(transaction)
       end
 
       to_send = {
