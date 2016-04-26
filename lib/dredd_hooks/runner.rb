@@ -19,38 +19,57 @@ module DreddHooks
     end
 
     def register_before_hook(transaction_name, &block)
-      @before_hooks[transaction_name] = [] if @before_hooks[transaction_name].nil?
-      @before_hooks[transaction_name].push(block)
+      hooks = @before_hooks
+      transaction_hooks = hooks.fetch(transaction_name, [])
+      transaction_hooks.push(block)
+      hooks[transaction_name] = transaction_hooks
+      @before_hooks = hooks
     end
 
     def register_before_validation_hook(transaction_name, &block)
-      @before_validation_hooks[transaction_name] = [] if @before_validation_hooks[transaction_name].nil?
-      @before_validation_hooks[transaction_name].push(block)
+      hooks = @before_validation_hooks
+      transaction_hooks = hooks.fetch(transaction_name, [])
+      transaction_hooks.push(block)
+      hooks[transaction_name] = transaction_hooks
+      @before_validation_hooks = hooks
     end
 
     def register_after_hook(transaction_name, &block)
-      @after_hooks[transaction_name] = [] if @after_hooks[transaction_name].nil?
-      @after_hooks[transaction_name].push(block)
+      hooks = @after_hooks
+      transaction_hooks = hooks.fetch(transaction_name, [])
+      transaction_hooks.push(block)
+      hooks[transaction_name] = transaction_hooks
+      @after_hooks = hooks
     end
 
     def register_before_each_hook(&block)
-      @before_each_hooks.push(block)
+      hooks = @before_each_hooks
+      hooks.push(block)
+      @before_each_hooks = hooks
     end
 
     def register_before_each_validation_hook(&block)
-      @before_each_validation_hooks.push(block)
+      hooks = @before_each_validation_hooks
+      hooks.push(block)
+      @before_each_validation_hooks = hooks
     end
 
     def register_after_each_hook(&block)
-      @after_each_hooks.push(block)
+      hooks = @after_each_hooks
+      hooks.push(block)
+      @after_each_hooks = hooks
     end
 
     def register_before_all_hook(&block)
-      @before_all_hooks.push(block)
+      hooks = @before_all_hooks
+      hooks.push(block)
+      @before_all_hooks = hooks
     end
 
     def register_after_all_hook(&block)
-      @after_all_hooks.push(block)
+      hooks = @after_all_hooks
+      hooks.push(block)
+      @after_all_hooks = hooks
     end
 
     #
