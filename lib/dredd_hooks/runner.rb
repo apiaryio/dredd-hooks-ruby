@@ -77,27 +77,30 @@ module DreddHooks
     #
 
     def run_before_hooks_for_transaction(transaction)
+      hooks =  @before_hooks
       transaction_name = transaction["name"]
-      hooks = @before_hooks[transaction_name] || []
-      hooks.each do |hook_proc|
+      transaction_hooks = hooks.fetch(transaction_name, [])
+      transaction_hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
       return transaction
     end
 
     def run_before_validation_hooks_for_transaction(transaction)
+      hooks =  @before_validation_hooks
       transaction_name = transaction["name"]
-      hooks = @before_validation_hooks[transaction_name] || []
-      hooks.each do |hook_proc|
+      transaction_hooks = hooks.fetch(transaction_name, [])
+      transaction_hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
       return transaction
     end
 
     def run_after_hooks_for_transaction(transaction)
+      hooks =  @after_hooks
       transaction_name = transaction["name"]
-      hooks = @after_hooks[transaction_name] || []
-      hooks.each do |hook_proc|
+      transaction_hooks = hooks.fetch(transaction_name, [])
+      transaction_hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
       return transaction
@@ -108,21 +111,24 @@ module DreddHooks
     #
 
     def run_before_each_hooks_for_transaction(transaction)
-      @before_each_hooks.each do |hook_proc|
+      hooks = @before_each_hooks
+      hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
       return transaction
     end
 
     def run_before_each_validation_hooks_for_transaction(transaction)
-      @before_each_validation_hooks.each do |hook_proc|
+      hooks = @before_each_validation_hooks
+      hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
       return transaction
     end
 
     def run_after_each_hooks_for_transaction(transaction)
-      @after_each_hooks.each do |hook_proc|
+      hooks = @after_each_hooks
+      hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
       return transaction
@@ -133,14 +139,16 @@ module DreddHooks
     #
 
     def run_before_all_hooks_for_transaction(transaction)
-      @before_all_hooks.each do |hook_proc|
+      hooks = @before_all_hooks
+      hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
       return transaction
     end
 
     def run_after_all_hooks_for_transaction(transaction)
-      @after_all_hooks.each do |hook_proc|
+      hooks = @after_all_hooks
+      hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
       return transaction
