@@ -17,7 +17,7 @@ module DreddHooks
 
     def initialize
       @server = TCPServer.new HOST, PORT
-      @runner = Runner.new
+      @runner = Runner.instance
     end
 
     def process_message message, client

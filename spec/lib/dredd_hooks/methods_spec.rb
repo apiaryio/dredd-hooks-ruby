@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+require 'dredd_hooks/methods'
+
 module DreddHooks
 
   class DummyHooksFile
@@ -40,6 +42,10 @@ module DreddHooks
 
     it 'is defines #after_all', public: true do
       expect(hooks_file).to respond_to :after_all
+    end
+
+    it 'does not expose its #runner', private: true do
+      expect(hooks_file).not_to respond_to :runner
     end
   end
 end
