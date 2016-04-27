@@ -28,6 +28,11 @@ module DreddHooks
       it { expect(runner).to respond_to :register_before_all_hook }
       it { expect(runner).to respond_to :register_after_all_hook }
     end
+
+    describe 'does not expose its generator methods', private: true do
+
+      it { expect(runner.class).not_to respond_to :define_hooks_on_single_transactions }
+    end
   end
 end
 

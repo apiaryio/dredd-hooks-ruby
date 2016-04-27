@@ -5,6 +5,23 @@ module DreddHooks
 
     include Singleton
 
+    HOOKS_ON_SINGLE_TRANSACTIONS = [:before, :before_validation, :after]
+
+    def self.define_hooks_on_single_transactions
+      HOOKS_ON_SINGLE_TRANSACTIONS.each do |hook_name|
+        define_method "register_#{hook_name}_hook" do |transaction_name, &block|
+          hooks = instance_variable_get("@#{hook_name}_hooks")
+          transaction_hooks = hooks.fetch(transaction_name, [])
+          transaction_hooks.push(block)
+          hooks[transaction_name] = transaction_hooks
+          instance_variable_set("@#{hook_name}_hooks", hooks)
+        end
+      end
+    end
+    private_class_method :define_hooks_on_single_transactions
+
+    define_hooks_on_single_transactions
+
     def initialize
       @before_hooks = {}
       @before_validation_hooks = {}
@@ -16,30 +33,6 @@ module DreddHooks
 
       @before_all_hooks = []
       @after_all_hooks = []
-    end
-
-    def register_before_hook(transaction_name, &block)
-      hooks = @before_hooks
-      transaction_hooks = hooks.fetch(transaction_name, [])
-      transaction_hooks.push(block)
-      hooks[transaction_name] = transaction_hooks
-      @before_hooks = hooks
-    end
-
-    def register_before_validation_hook(transaction_name, &block)
-      hooks = @before_validation_hooks
-      transaction_hooks = hooks.fetch(transaction_name, [])
-      transaction_hooks.push(block)
-      hooks[transaction_name] = transaction_hooks
-      @before_validation_hooks = hooks
-    end
-
-    def register_after_hook(transaction_name, &block)
-      hooks = @after_hooks
-      transaction_hooks = hooks.fetch(transaction_name, [])
-      transaction_hooks.push(block)
-      hooks[transaction_name] = transaction_hooks
-      @after_hooks = hooks
     end
 
     def register_before_each_hook(&block)
