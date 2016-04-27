@@ -1,3 +1,4 @@
+require 'dredd_hooks/definitions'
 require 'dredd_hooks/runner'
 
 module DreddHooks
@@ -5,17 +6,18 @@ module DreddHooks
   # The Ruby hooks API
   module Methods
 
-    def before(transaction_name, &block)
-      runner.register_before_hook(transaction_name, &block)
-    end
+    def self.define_hooks_on_single_transactions
+      HOOKS_ON_SINGLE_TRANSACTIONS.each do |hook_name|
 
-    def before_validation(transaction_name, &block)
-      runner.register_before_validation_hook(transaction_name, &block)
-    end
+        define_method hook_name do |transaction_name, &block|
+          runner.send("register_#{hook_name}_hook", transaction_name, &block)
+        end
 
-    def after(transaction_name, &block)
-      runner.register_after_hook(transaction_name, &block)
+      end
     end
+    private_class_method :define_hooks_on_single_transactions
+
+    define_hooks_on_single_transactions
 
     def before_each(&block)
       runner.register_before_each_hook(&block)

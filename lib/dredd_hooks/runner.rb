@@ -1,5 +1,7 @@
 require 'singleton'
 
+require 'dredd_hooks/definitions'
+
 module DreddHooks
   class Runner
 
