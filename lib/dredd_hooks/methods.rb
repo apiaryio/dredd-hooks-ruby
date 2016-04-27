@@ -6,6 +6,15 @@ module DreddHooks
   # The Ruby hooks API
   module Methods
 
+    # Define hook methods in the form of:
+    #
+    #     def before(transaction_name, &block)
+    #       runner.register_before_hook(transaction_name, &block)
+    #     end
+    #
+    # Hooks names are defined by HOOKS_ON_SINGLE_TRANSACTIONS.
+    #
+    # Returns nothing.
     def self.define_hooks_on_single_transactions
       HOOKS_ON_SINGLE_TRANSACTIONS.each do |hook_name|
 
@@ -17,6 +26,15 @@ module DreddHooks
     end
     private_class_method :define_hooks_on_single_transactions
 
+    # Define hook methods in the form of:
+    #
+    #     def before_all(&block)
+    #       runner.register_before_all_hook(&block)
+    #     end
+    #
+    # Hooks names are defined by HOOKS_ON_MULTIPLE_TRANSACTIONS.
+    #
+    # Returns nothing.
     def self.define_hooks_on_multiple_transactions
       HOOKS_ON_MULTIPLE_TRANSACTIONS.each do |hook_name|
 
