@@ -100,6 +100,14 @@ Run `rake spec:public` to print the gem public documentation.
   [tags]: https://www.relishapp.com/rspec/rspec-core/v/3-4/docs/command-line/tag-option
   [travis]: https://travis-ci.org/gonzalo-bulnes/simple_token_authentication/builds
 
+### Maintenance
+
+Extending the DSL to support new hooks is meant to be easy, see the [maintenance documentation][doc-maintenance] for details. : )
+
+  [doc-maintenance]: ./doc/README.md
+
+> Refactored with [love, internet style](https://www.youtube.com/watch?v=Xe1TZaElTAs).
+
 Contributing
 ------------
 

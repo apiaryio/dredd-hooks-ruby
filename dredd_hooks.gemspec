@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.executables   = "dredd-hooks-ruby"
-  spec.files         = Dir["{bin,lib}/**/*", "CHANGELOG.md", "Gemfile", "LICENSE.txt", "Rakefile", "README.md" ]
+  spec.files         = Dir["{bin,doc,lib}/**/*", "CHANGELOG.md", "Gemfile", "LICENSE.txt", "Rakefile", "README.md" ]
   spec.test_files    = Dir["{features,spec}/**/*"]
 
   spec.add_development_dependency "aruba", "~> 0.6.2"
