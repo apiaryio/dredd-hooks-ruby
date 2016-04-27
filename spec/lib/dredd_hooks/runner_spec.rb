@@ -33,6 +33,7 @@ module DreddHooks
 
       it { expect(runner.class).not_to respond_to :define_hooks_on_single_transactions }
       it { expect(runner.class).not_to respond_to :define_hooks_on_multiple_transactions }
+      it { expect(runner.class).not_to respond_to :define_runners_for_hooks_on_single_transactions }
       it { expect(runner.class).not_to respond_to :define_runners_for_hooks_on_multiple_transactions }
     end
   end
