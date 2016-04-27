@@ -32,6 +32,7 @@ module DreddHooks
     describe 'does not expose its generator methods', private: true do
 
       it { expect(runner.class).not_to respond_to :define_hooks_on_single_transactions }
+      it { expect(runner.class).not_to respond_to :define_hooks_on_multiple_transactions }
     end
   end
 end
