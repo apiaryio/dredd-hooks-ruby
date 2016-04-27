@@ -12,7 +12,7 @@ module DreddHooks
     def self.define_hooks_on_single_transactions
       HOOKS_ON_SINGLE_TRANSACTIONS.each do |hook_name|
         define_method "register_#{hook_name}_hook" do |transaction_name, &block|
-          hooks = instance_variable_get("@#{hook_name}_hooks")
+          hooks = instance_variable_get("@#{hook_name}_hooks") || {}
           transaction_hooks = hooks.fetch(transaction_name, [])
           transaction_hooks.push(block)
           hooks[transaction_name] = transaction_hooks
@@ -25,7 +25,7 @@ module DreddHooks
     def self.define_hooks_on_multiple_transactions
       HOOKS_ON_MULTIPLE_TRANSACTIONS.each do |hook_name|
         define_method "register_#{hook_name}_hook" do |&block|
-          hooks = instance_variable_get("@#{hook_name}_hooks")
+          hooks = instance_variable_get("@#{hook_name}_hooks") || []
           hooks.push(block)
           instance_variable_set("@#{hook_name}_hooks", hooks)
         end
@@ -36,25 +36,12 @@ module DreddHooks
     define_hooks_on_single_transactions
     define_hooks_on_multiple_transactions
 
-    def initialize
-      @before_hooks = {}
-      @before_validation_hooks = {}
-      @after_hooks = {}
-
-      @before_each_hooks = []
-      @before_each_validation_hooks = []
-      @after_each_hooks = []
-
-      @before_all_hooks = []
-      @after_all_hooks = []
-    end
-
     #
     # Runers for Transaction specific hooks
     #
 
     def run_before_hooks_for_transaction(transaction)
-      hooks =  @before_hooks
+      hooks =  @before_hooks || {}
       transaction_name = transaction["name"]
       transaction_hooks = hooks.fetch(transaction_name, [])
       transaction_hooks.each do |hook_proc|
@@ -64,7 +51,7 @@ module DreddHooks
     end
 
     def run_before_validation_hooks_for_transaction(transaction)
-      hooks =  @before_validation_hooks
+      hooks =  @before_validation_hooks || {}
       transaction_name = transaction["name"]
       transaction_hooks = hooks.fetch(transaction_name, [])
       transaction_hooks.each do |hook_proc|
@@ -74,7 +61,7 @@ module DreddHooks
     end
 
     def run_after_hooks_for_transaction(transaction)
-      hooks =  @after_hooks
+      hooks =  @after_hooks || {}
       transaction_name = transaction["name"]
       transaction_hooks = hooks.fetch(transaction_name, [])
       transaction_hooks.each do |hook_proc|
@@ -88,7 +75,7 @@ module DreddHooks
     #
 
     def run_before_each_hooks_for_transaction(transaction)
-      hooks = @before_each_hooks
+      hooks = @before_each_hooks || []
       hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
@@ -96,7 +83,7 @@ module DreddHooks
     end
 
     def run_before_each_validation_hooks_for_transaction(transaction)
-      hooks = @before_each_validation_hooks
+      hooks = @before_each_validation_hooks || []
       hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
@@ -104,7 +91,7 @@ module DreddHooks
     end
 
     def run_after_each_hooks_for_transaction(transaction)
-      hooks = @after_each_hooks
+      hooks = @after_each_hooks || []
       hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
@@ -116,7 +103,7 @@ module DreddHooks
     #
 
     def run_before_all_hooks_for_transaction(transaction)
-      hooks = @before_all_hooks
+      hooks = @before_all_hooks || []
       hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
@@ -124,7 +111,7 @@ module DreddHooks
     end
 
     def run_after_all_hooks_for_transaction(transaction)
-      hooks = @after_all_hooks
+      hooks = @after_all_hooks || []
       hooks.each do |hook_proc|
         hook_proc.call(transaction)
       end
