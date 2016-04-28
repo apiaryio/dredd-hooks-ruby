@@ -1,7 +1,7 @@
 require 'socket'
-require 'json'
 
 require 'dredd_hooks/runner'
+require 'dredd_hooks/server/buffer'
 
 module DreddHooks
 
@@ -18,6 +18,7 @@ module DreddHooks
     def initialize
       @server = TCPServer.new HOST, PORT
       @runner = Runner.instance
+      @buffer = Buffer.new(MESSAGE_DELIMITER)
     end
 
     def process_message message, client
@@ -60,24 +61,11 @@ module DreddHooks
         #Thread.abort_on_exception=true
         client = @server.accept
         STDERR.puts 'Dredd connected to Ruby Dredd hooks worker'
-        buffer = ""
+        @buffer.flush!
         while (data = client.recv(10))
-          buffer += data
-          if buffer.include? MESSAGE_DELIMITER
-            splitted_buffer = buffer.split(MESSAGE_DELIMITER)
-            buffer = ""
-
-            messages = splitted_buffer.inject([]) { |messages, message|
-              begin
-                messages.push JSON.parse(message)
-              rescue JSON::ParserError
-                # If the message after the delimiter is not parseable JSON,
-                # then it's a chunk of the next message, and should be put back
-                # into the buffer.
-                buffer += message
-                messages
-              end
-            }
+          @buffer << data
+          if @buffer.any_message?
+            messages = @buffer.unshift_messages
 
             messages.each do |message|
               process_message(message, client)
