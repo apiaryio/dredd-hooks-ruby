@@ -50,6 +50,13 @@ module DreddHooks
     it 'does not expose its #runner', private: true do
       expect(hooks_file).not_to respond_to :runner
     end
+
+    describe 'does not expose its generator methods', private: true do
+
+      it { expect(DreddHooks::Methods).not_to respond_to :define_hooks_on_multiple_transactions }
+      it { expect(DreddHooks::Methods).not_to respond_to :define_hooks_on_single_transactions }
+
+    end
   end
 end
 
