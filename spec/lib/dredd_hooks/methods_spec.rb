@@ -12,36 +12,39 @@ module DreddHooks
 
     let(:hooks_file) { DummyHooksFile.new }
 
-    it 'defines #before', public: true do
-      expect(hooks_file).to respond_to :before
-    end
+    describe 'exposes the Ruby hooks DSL', public: true do
 
-    it 'defines #before_validation', public: true do
-      expect(hooks_file).to respond_to :before_validation
-    end
+      it 'defines #before' do
+        expect(hooks_file).to respond_to :before
+      end
 
-    it 'defines #after', public: true do
-      expect(hooks_file).to respond_to :after
-    end
+      it 'defines #before_validation' do
+        expect(hooks_file).to respond_to :before_validation
+      end
 
-    it 'defines #before_each', public: true do
-      expect(hooks_file).to respond_to :before_each
-    end
+      it 'defines #after' do
+        expect(hooks_file).to respond_to :after
+      end
 
-    it 'defines #before_each_validation', public: true do
-      expect(hooks_file).to respond_to :before_each_validation
-    end
+      it 'defines #before_each' do
+        expect(hooks_file).to respond_to :before_each
+      end
 
-    it 'defines #after_each', public: true do
-      expect(hooks_file).to respond_to :after_each
-    end
+      it 'defines #before_each_validation' do
+        expect(hooks_file).to respond_to :before_each_validation
+      end
 
-    it 'defines #before_all', public: true do
-      expect(hooks_file).to respond_to :before_all
-    end
+      it 'defines #after_each' do
+        expect(hooks_file).to respond_to :after_each
+      end
 
-    it 'defines #after_all', public: true do
-      expect(hooks_file).to respond_to :after_all
+      it 'defines #before_all' do
+        expect(hooks_file).to respond_to :before_all
+      end
+
+      it 'defines #after_all' do
+        expect(hooks_file).to respond_to :after_all
+      end
     end
 
     it 'does not expose its #runner', private: true do
