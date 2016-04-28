@@ -4,7 +4,7 @@ How to Add New Hooks
 Dredd does support new hooks? It's time to extend the Ruby DSL!
 
 Most of the new hooks definition is automated, but not everything yet.
-In order to enable your new hook in the DSL (`DreddHook::Methods`) and the `DreddHooks::Runner`:
+In order to enable your new hook:
 
 1. Determine if the hook is specific to a transaction or applies to all of them
 1. Add the _registration_ and _run_ method to the [runner spec][runner-spec]

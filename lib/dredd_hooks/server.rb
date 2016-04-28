@@ -72,7 +72,7 @@ module DreddHooks
                 messages.push JSON.parse(message)
               rescue JSON::ParserError
                 # If the message after the delimiter is not parseable JSON,
-                # then it's a chunk of next message, and should be put back
+                # then it's a chunk of the next message, and should be put back
                 # into the buffer.
                 buffer += message
                 messages
