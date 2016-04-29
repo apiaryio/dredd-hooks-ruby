@@ -33,7 +33,7 @@ module DreddHooks
 
             messages.each do |message|
               response = process_message(message)
-              client.puts response + "\n"
+              client.puts response + MESSAGE_DELIMITER
             end
           end
         end
