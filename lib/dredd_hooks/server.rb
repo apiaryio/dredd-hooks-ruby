@@ -1,15 +1,15 @@
 require 'socket'
 
-require 'dredd_hooks/runner'
 require 'dredd_hooks/server/buffer'
+require 'dredd_hooks/server/events_handler'
 
 module DreddHooks
 
   # The hooks worker server
   class Server
 
-    attr_reader :runner
-    private :runner
+    attr_reader :events_handler
+    private :events_handler
 
     HOST = '127.0.0.1'
     PORT = 61321
@@ -17,36 +17,15 @@ module DreddHooks
 
     def initialize
       @server = TCPServer.new HOST, PORT
-      @runner = Runner.instance
       @buffer = Buffer.new(MESSAGE_DELIMITER)
+      @events_handler = EventsHandler.new
     end
 
     def process_message message, client
       event = message['event']
       transaction = message['data']
 
-      if event == "beforeEach"
-        transaction = runner.run_before_each_hooks_for_transaction(transaction)
-        transaction = runner.run_before_hooks_for_transaction(transaction)
-      end
-
-      if event == "beforeEachValidation"
-        transaction = runner.run_before_each_validation_hooks_for_transaction(transaction)
-        transaction = runner.run_before_validation_hooks_for_transaction(transaction)
-      end
-
-      if event == "afterEach"
-        transaction = runner.run_after_hooks_for_transaction(transaction)
-        transaction = runner.run_after_each_hooks_for_transaction(transaction)
-      end
-
-      if event == "beforeAll"
-        transaction = runner.run_before_all_hooks_for_transaction(transaction)
-      end
-
-      if event == "afterAll"
-        transaction = runner.run_after_all_hooks_for_transaction(transaction)
-      end
+      transaction = events_handler.handle(event, transaction)
 
       to_send = {
         "uuid" => message['uuid'],
