@@ -21,20 +21,6 @@ module DreddHooks
       @events_handler = EventsHandler.new
     end
 
-    def process_message message, client
-      event = message['event']
-      transaction = message['data']
-
-      transaction = events_handler.handle(event, transaction)
-
-      to_send = {
-        "uuid" => message['uuid'],
-        "event" => event,
-        "data" => transaction
-      }.to_json
-      client.puts to_send + "\n"
-    end
-
     def run
       loop do
         #Thread.abort_on_exception=true
@@ -54,5 +40,23 @@ module DreddHooks
         client.close
       end
     end
+
+    private
+
+      def process_message(message, client)
+        event = message['event']
+        transaction = message['data']
+
+        transaction = events_handler.handle(event, transaction)
+
+        to_send = {
+          "uuid" => message['uuid'],
+          "event" => event,
+          "data" => transaction
+        }.to_json
+        client.puts to_send + "\n"
+      end
+
   end
 end
+
