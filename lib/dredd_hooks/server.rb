@@ -23,7 +23,6 @@ module DreddHooks
 
     def run
       loop do
-        #Thread.abort_on_exception=true
         client = @server.accept
         STDERR.puts 'Dredd connected to Ruby Dredd hooks worker'
         @buffer.flush!
@@ -33,7 +32,8 @@ module DreddHooks
             messages = @buffer.unshift_messages
 
             messages.each do |message|
-              process_message(message, client)
+              response = process_message(message)
+              client.puts response + "\n"
             end
           end
         end
@@ -43,18 +43,17 @@ module DreddHooks
 
     private
 
-      def process_message(message, client)
+      def process_message(message)
         event = message['event']
         transaction = message['data']
 
         transaction = events_handler.handle(event, transaction)
 
-        to_send = {
+        response = {
           "uuid" => message['uuid'],
           "event" => event,
           "data" => transaction
         }.to_json
-        client.puts to_send + "\n"
       end
 
   end
