@@ -7,8 +7,8 @@ module DreddHooks
       attr_reader :runner
       private :runner
 
-      def initialize
-        @runner = Runner.instance
+      def initialize(runner=Runner.instance)
+        @runner = runner
       end
 
       def handle(event, transaction)
