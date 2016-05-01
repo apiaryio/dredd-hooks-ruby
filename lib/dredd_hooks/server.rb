@@ -8,8 +8,8 @@ module DreddHooks
   # The hooks worker server
   class Server
 
-    attr_reader :error, :events_handler, :out
-    private :error, :events_handler, :out
+    attr_reader :buffer, :error, :events_handler, :out, :server
+    private :buffer, :error, :events_handler, :out, :server
 
     HOST = '127.0.0.1'
     PORT = 61321
@@ -18,20 +18,20 @@ module DreddHooks
     def initialize(error=STDERR, out=STDOUT)
       @error = error
       @out = out
-      @server = TCPServer.new HOST, PORT
+      @server = TCPServer.new(HOST, PORT)
       @buffer = Buffer.new(MESSAGE_DELIMITER)
       @events_handler = EventsHandler.new
     end
 
     def run
       loop do
-        client = @server.accept
+        client = server.accept
         out.puts 'Dredd connected to Ruby Dredd hooks worker'
-        @buffer.flush!
+        buffer.flush!
         while (data = client.recv(10))
-          @buffer << data
-          if @buffer.any_message?
-            messages = @buffer.unshift_messages
+          buffer << data
+          if buffer.any_message?
+            messages = buffer.unshift_messages
 
             messages.each do |message|
               response = process_message(message)
