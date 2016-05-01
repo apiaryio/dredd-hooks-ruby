@@ -49,10 +49,14 @@ module DreddHooks
 
         transaction = events_handler.handle(event, transaction)
 
-        response = {
-          "uuid" => message['uuid'],
-          "event" => event,
-          "data" => transaction
+        response(message['uuid'], event, transaction)
+      end
+
+      def response(message_uuid, event, transaction)
+        {
+          uuid: message_uuid,
+          event: event,
+          data: transaction,
         }.to_json
       end
 
