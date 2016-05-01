@@ -17,9 +17,9 @@ module DreddHooks
 
       def handle(event, transaction)
 
-         events.fetch(event.to_sym, []).each do |hook_name|
-         begin
-           transaction = runner.send("run_#{hook_name}_hooks_for_transaction", transaction)
+        events.fetch(event.to_sym, []).each do |hook_name|
+          begin
+            transaction = runner.send("run_#{hook_name}_hooks_for_transaction", transaction)
           rescue NoMethodError
             raise UnknownHookError.new(hook_name)
           end
