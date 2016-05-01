@@ -1,31 +1,10 @@
+require 'dredd_hooks/definitions'
 require 'dredd_hooks/errors'
 require 'dredd_hooks/runner'
 
 module DreddHooks
 
   class Server
-
-    EVENTS = {
-      beforeEach: [
-        :before_each,
-        :before,
-      ],
-      beforeEachValidation: [
-        :before_each_validation,
-        :before_validation,
-      ],
-      afterEach: [
-        :after,
-        :after_each,
-      ],
-      afterAll: [
-        :after_all,
-      ],
-      beforeAll: [
-        :before_all,
-      ],
-    }
-
     class EventsHandler
 
       attr_reader :events, :runner
