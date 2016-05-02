@@ -11,6 +11,9 @@ module DreddHooks
         @message_delimiter = message_delimiter
       end
 
+      # Empty the buffer.
+      #
+      # Returns the buffer content String.
       def flush!
         content = @content
         @content = ""
