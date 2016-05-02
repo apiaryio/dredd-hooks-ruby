@@ -24,6 +24,7 @@ module DreddHooks
     end
 
     def run
+      disable_buffering(out)
       loop do
         client = server.accept
         out.puts 'Dredd connected to Ruby Dredd hooks worker'
@@ -44,6 +45,14 @@ module DreddHooks
     end
 
     private
+
+      # Write to a file (e.g. STDOUT) without delay
+      #
+      # See https://stackoverflow.com/q/23001033
+      # and http://ruby-doc.org/core-2.3.1/IO.html#method-i-sync-3D
+      def disable_buffering(file)
+        file.sync = true
+      end
 
       def process_message(message)
         event = message['event']
