@@ -7,19 +7,13 @@ Test your api with [Dredd HTTP API testing framework](https://github.com/apiaryi
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add the gem to your `Gemfile`:
 
 ```ruby
-gem 'dredd_hooks'
+# Gemfile
+
+gem 'dredd_hooks', '0.1.0' # see semver.org
 ```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install dredd_hooks
 
 ## Usage
 
