@@ -47,6 +47,15 @@ Module `DreddHooks::Methods` mixes in following methods `before`, `after`, `befo
 
 Usage is very similar to [sync JS hooks API](http://dredd.readthedocs.org/en/latest/hooks/#sync-api)
 
+## Development
+
+### Testing
+
+```bash
+# Run the test suite
+rake
+```
+
 ## Contributing
 
 1. Fork it
