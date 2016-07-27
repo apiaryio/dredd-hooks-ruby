@@ -1,15 +1,15 @@
 require 'socket'
-require 'json'
 
-require 'dredd_hooks/runner'
+require 'dredd_hooks/server/buffer'
+require 'dredd_hooks/server/events_handler'
 
 module DreddHooks
 
   # The hooks worker server
   class Server
 
-    attr_reader :runner
-    private :runner
+    attr_reader :events_handler
+    private :events_handler
 
     HOST = '127.0.0.1'
     PORT = 61321
@@ -17,75 +17,45 @@ module DreddHooks
 
     def initialize
       @server = TCPServer.new HOST, PORT
-      @runner = Runner.instance
-    end
-
-    def process_message message, client
-      event = message['event']
-      transaction = message['data']
-
-      if event == "beforeEach"
-        transaction = runner.run_before_each_hooks_for_transaction(transaction)
-        transaction = runner.run_before_hooks_for_transaction(transaction)
-      end
-
-      if event == "beforeEachValidation"
-        transaction = runner.run_before_each_validation_hooks_for_transaction(transaction)
-        transaction = runner.run_before_validation_hooks_for_transaction(transaction)
-      end
-
-      if event == "afterEach"
-        transaction = runner.run_after_hooks_for_transaction(transaction)
-        transaction = runner.run_after_each_hooks_for_transaction(transaction)
-      end
-
-      if event == "beforeAll"
-        transaction = runner.run_before_all_hooks_for_transaction(transaction)
-      end
-
-      if event == "afterAll"
-        transaction = runner.run_after_all_hooks_for_transaction(transaction)
-      end
-
-      to_send = {
-        "uuid" => message['uuid'],
-        "event" => event,
-        "data" => transaction
-      }.to_json
-      client.puts to_send + "\n"
+      @buffer = Buffer.new(MESSAGE_DELIMITER)
+      @events_handler = EventsHandler.new
     end
 
     def run
       loop do
-        #Thread.abort_on_exception=true
         client = @server.accept
         STDERR.puts 'Dredd connected to Ruby Dredd hooks worker'
-        buffer = ""
+        @buffer.flush!
         while (data = client.recv(10))
-          buffer += data
-          if buffer.include? MESSAGE_DELIMITER
-            splitted_buffer = buffer.split(MESSAGE_DELIMITER)
-            buffer = ""
-
-            messages = splitted_buffer.inject([]) { |messages, message|
-              begin
-                messages.push JSON.parse(message)
-              rescue JSON::ParserError
-                # If the message after the delimiter is not parseable JSON,
-                # then it's a chunk of next message, and should be put back
-                # into the buffer.
-                buffer += message
-                messages
-              end
-            }
+          @buffer << data
+          if @buffer.any_message?
+            messages = @buffer.unshift_messages
 
             messages.each do |message|
-              process_message(message, client)
+              response = process_message(message)
+              client.puts response + MESSAGE_DELIMITER
             end
           end
         end
         client.close
       end
     end
+
+    private
+
+      def process_message(message)
+        event = message['event']
+        transaction = message['data']
+
+        transaction = events_handler.handle(event, transaction)
+
+        response = {
+          "uuid" => message['uuid'],
+          "event" => event,
+          "data" => transaction
+        }.to_json
+      end
+
   end
 end
+

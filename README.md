@@ -8,6 +8,10 @@ Ruby Hooks Handler for Dredd API Testing Framework
 
 Test your API with the [Dredd HTTP API testing framework](https://github.com/apiaryio/dredd) and write [hooks](http://dredd.readthedocs.org/en/latest/hooks/) in Ruby!
 
+> **DISCLAIMER**: This is an early version of _dred-hooks-ruby_, please be aware that it will not be stable until **v1.0.0**. At any moment, [feedback][issues] is welcome! : )
+
+  [issues]: https://github.com/apiaryio/dredd-hooks-ruby/issues
+
 Installation
 ------------
 
