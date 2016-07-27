@@ -23,47 +23,48 @@ Feature: Execution order
   Scenario:
     Given a file named "hookfile.rb" with:
       """
+      require 'dredd_hooks/methods'
       include DreddHooks::Methods
 
       key = 'hooks_modifications'
 
       before("/message > GET") do |transaction|
-        transaction[key] = [] if transaction[key].nil?
+        transaction[key] ||= []
         transaction[key].push "before modification"
       end
 
       after("/message > GET") do |transaction|
-        transaction[key] = [] if transaction[key].nil?
+        transaction[key] ||= []
         transaction[key].push "after modification"
       end
 
       before_validation("/message > GET") do |transaction|
-        transaction[key] = [] if transaction[key].nil?
+        transaction[key] ||= []
         transaction[key].push "before validation modification"
       end
 
       before_all do |transaction|
-        transaction[0][key] = [] if transaction[0][key].nil?
+        transaction[0][key] ||= []
         transaction[0][key].push "before all modification"
       end
 
       after_all do |transaction|
-        transaction[0][key] = [] if transaction[0][key].nil?
+        transaction[0][key] ||= []
         transaction[0][key].push "after all modification"
       end
 
       before_each do |transaction|
-        transaction[key] = [] if transaction[key].nil?
+        transaction[key] ||= []
         transaction[key].push "before each modification"
       end
 
       before_each_validation do |transaction|
-        transaction[key] = [] if transaction[key].nil?
+        transaction[key] ||= []
         transaction[key].push "before each validation modification"
       end
 
       after_each do |transaction|
-        transaction[key] = [] if transaction[key].nil?
+        transaction[key] ||= []
         transaction[key].push "after each modification"
       end
 

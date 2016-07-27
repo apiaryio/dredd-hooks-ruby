@@ -23,6 +23,7 @@ Feature: Multiple hookfiles with a glob
   Scenario:
     Given a file named "hookfile1.rb" with:
       """
+      require 'dredd_hooks/methods'
       include DreddHooks::Methods
       before("/message > GET") do |transaction|
         puts "It's me, File1"
@@ -30,6 +31,7 @@ Feature: Multiple hookfiles with a glob
       """
     And a file named "hookfile2.rb" with:
       """
+      require 'dredd_hooks/methods'
       include DreddHooks::Methods
       before("/message > GET") do |transaction|
         puts "It's me, File2"
@@ -37,6 +39,7 @@ Feature: Multiple hookfiles with a glob
       """
     And a file named "hookfile_to_be_globed.rb" with:
       """
+      require 'dredd_hooks/methods'
       include DreddHooks::Methods
       before("/message > GET") do |transaction|
         puts "It's me, File3"
