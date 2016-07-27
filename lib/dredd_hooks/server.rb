@@ -8,28 +8,30 @@ module DreddHooks
   # The hooks worker server
   class Server
 
-    attr_reader :events_handler
-    private :events_handler
+    attr_reader :buffer, :error, :events_handler, :out, :server
+    private :buffer, :error, :events_handler, :out, :server
 
     HOST = '127.0.0.1'
     PORT = 61321
     MESSAGE_DELIMITER = "\n"
 
-    def initialize
-      @server = TCPServer.new HOST, PORT
+    def initialize(error=STDERR, out=STDOUT)
+      @error = error
+      @out = out
+      @server = TCPServer.new(HOST, PORT)
       @buffer = Buffer.new(MESSAGE_DELIMITER)
       @events_handler = EventsHandler.new
     end
 
     def run
       loop do
-        client = @server.accept
-        STDERR.puts 'Dredd connected to Ruby Dredd hooks worker'
-        @buffer.flush!
+        client = server.accept
+        out.puts 'Dredd connected to Ruby Dredd hooks worker'
+        buffer.flush!
         while (data = client.recv(10))
-          @buffer << data
-          if @buffer.any_message?
-            messages = @buffer.unshift_messages
+          buffer << data
+          if buffer.any_message?
+            messages = buffer.unshift_messages
 
             messages.each do |message|
               response = process_message(message)
@@ -49,10 +51,14 @@ module DreddHooks
 
         transaction = events_handler.handle(event, transaction)
 
-        response = {
-          "uuid" => message['uuid'],
-          "event" => event,
-          "data" => transaction
+        response(message['uuid'], event, transaction)
+      end
+
+      def response(message_uuid, event, transaction)
+        {
+          uuid: message_uuid,
+          event: event,
+          data: transaction,
         }.to_json
       end
 
