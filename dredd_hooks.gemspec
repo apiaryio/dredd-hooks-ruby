@@ -14,11 +14,12 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.executables   = "dredd-hooks-ruby"
-  spec.files         = Dir["{bin,lib}/**/*", "CHANGELOG.md", "Gemfile", "LICENSE.txt", "Rakefile", "README.md" ]
-  spec.test_files    = Dir["features/**/*"]
+  spec.files         = Dir["{bin,doc,lib}/**/*", "CHANGELOG.md", "Gemfile", "LICENSE.txt", "Rakefile", "README.md" ]
+  spec.test_files    = Dir["{features,spec}/**/*"]
 
   spec.add_development_dependency "aruba", "~> 0.6.2"
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "sinatra", "~> 1.4.5"
 end

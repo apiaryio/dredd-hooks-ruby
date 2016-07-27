@@ -85,6 +85,29 @@ Development
 rake
 ```
 
+A few [Cucumber][cucumber] features provide an end-to-end test harness, and a set of [RSpec][rspec] specs provide both a more granular documentation and a unit test harness.
+
+RSpec [tags][tags] are used to categorize the spec examples.
+
+Spec examples that are tagged as `public` describe aspects of the gem public API, and MAY be considered as its documentation.
+
+The `private` or `protected` specs are written for development purpose only. Because they describe internal behaviour which may change at any moment without notice, they are only executed as a secondary task by the [continuous integration service][travis] and SHOULD be ignored.
+
+Run `rake spec:public` to print the gem public documentation.
+
+  [cucumber]: https://github.com/cucumber/cucumber-rails
+  [rspec]: https://www.relishapp.com/rspec
+  [tags]: https://www.relishapp.com/rspec/rspec-core/v/3-4/docs/command-line/tag-option
+  [travis]: https://travis-ci.org/gonzalo-bulnes/simple_token_authentication/builds
+
+### Maintenance
+
+Extending the DSL to support new hooks is meant to be easy, see the [maintenance documentation][doc-maintenance] for details. : )
+
+  [doc-maintenance]: ./doc/README.md
+
+> Refactored with [love, internet style](https://www.youtube.com/watch?v=Xe1TZaElTAs).
+
 Contributing
 ------------
 
