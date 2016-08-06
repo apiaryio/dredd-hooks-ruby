@@ -3,11 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.1.0] - [Unreleased]
+## 0.1.0 - [Unreleased]
 
 ### Added
 
 - This change log : )
+- Possibility to use DreddHooks::Server as a library (see DreddHooks::CLI for an example)
 
 ### Changed
 
@@ -27,8 +28,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 The original [proof of concept][poc] was written by @netmilk.
 
+
+[Unreleased]: https://github.com/gonzalo-bulnes/dredd-hooks-ruby/compare/v0.0.1...gonzalo-bulnes:gonzalo-bulnes/refactor-ensure-server-can-be-used-as-library?expand=1
 [poc]: https://github.com/gonzalo-bulnes/dredd-rack/issues/7#issue-70936733
-[0.1.0]: https://github.com/gonzalo-bulnes/dredd-hooks-ruby/compare/v0.0.1...v0.1.0
 
 ## Inspiration
 
