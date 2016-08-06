@@ -3,10 +3,10 @@ require 'dredd_hooks'
 module DreddHooks
   class CLI
 
-    def self.start(error=STDERR, out=STDOUT)
+    def self.start(error=STDERR, out=STDOUT, files)
 
       # Load all files given on the command-line
-      DreddHooks::FileLoader.load(ARGV)
+      DreddHooks::FileLoader.load(files)
 
       # Run the server
 

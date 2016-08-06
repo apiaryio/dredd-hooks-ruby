@@ -4,4 +4,3 @@ $LOAD_PATH.push File.join(File.dirname(__FILE__), "/../lib" )
 require 'dredd_hooks/cli'
 
 DreddHooks::CLI.start(ARGV)
-
