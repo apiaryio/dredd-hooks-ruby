@@ -1,4 +1,4 @@
-Feature: Failing a transacstion
+Feature: Failing a transaction
 
   Background:
     Given I have "dredd-hooks-ruby" command installed
