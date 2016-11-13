@@ -10,9 +10,12 @@ module DreddHooks
 
 
     def self.unique_paths(patterns)
-      patterns.inject([]) { |paths, pattern|
+      paths = patterns.inject([]) { |paths, pattern|
         paths + Dir.glob(pattern)
       }.uniq
+
+      puts "No hook files found in #{patterns}" if paths.empty?
+      paths
     end
     private_class_method :unique_paths
   end
