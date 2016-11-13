@@ -1,6 +1,7 @@
 Ruby Hooks Handler for Dredd API Testing Framework
 ==================================================
 
+[![Gem Version](https://badge.fury.io/rb/dredd_hooks.svg)](http://badge.fury.io/rb/dredd_hooks)
 [![Build Status](https://travis-ci.org/apiaryio/dredd-hooks-ruby.svg?branch=master)](https://travis-ci.org/apiaryio/dredd-hooks-ruby)
 [![Dependency Status](https://gemnasium.com/badges/github.com/apiaryio/dredd-hooks-ruby.svg)](https://gemnasium.com/github.com/apiaryio/dredd-hooks-ruby)
 [![Code Climate](https://codeclimate.com/github/apiaryio/dredd-hooks-ruby/badges/gpa.svg)](https://codeclimate.com/github/apiaryio/dredd-hooks-ruby)
@@ -20,7 +21,7 @@ Add the gem to your `Gemfile`:
 ```ruby
 # Gemfile
 
-gem 'dredd_hooks', '0.1.0' # see semver.org
+gem 'dredd_hooks', '0.1.1' # see semver.org
 ```
 
 Usage

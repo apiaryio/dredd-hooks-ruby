@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.1.1] - 2016-11-13
 
 ### Added
 
@@ -35,7 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 The original [proof of concept][poc] was written by @netmilk.
 
 
-[Unreleased]: https://github.com/apiaryio/dredd-hooks-ruby/compare/v0.1.0...master
+[0.1.1]: https://github.com/apiaryio/dredd-hooks-ruby/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/apiaryio/dredd-hooks-ruby/compare/v0.0.1...v0.1.0
 [poc]: https://github.com/gonzalo-bulnes/dredd-rack/issues/7#issue-70936733
 
