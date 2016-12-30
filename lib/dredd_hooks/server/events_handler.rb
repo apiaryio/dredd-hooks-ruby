@@ -18,9 +18,10 @@ module DreddHooks
       def handle(event, transaction)
 
         events.fetch(event.to_sym, []).each do |hook_name|
-          begin
-            transaction = runner.send("run_#{hook_name}_hooks_for_transaction", transaction)
-          rescue NoMethodError
+          method_name = "run_#{hook_name}_hooks_for_transaction"
+          if runner.respond_to?(method_name)
+            transaction = runner.send(method_name, transaction)
+          else
             raise UnknownHookError.new(hook_name)
           end
         end
@@ -30,4 +31,3 @@ module DreddHooks
     end
   end
 end
-
