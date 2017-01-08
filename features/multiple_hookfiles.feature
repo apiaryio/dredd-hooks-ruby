@@ -19,7 +19,6 @@ Feature: Multiple hookfiles with a glob
           Hello World!
       """
 
-  @debug
   Scenario:
     Given a file named "hookfile1.rb" with:
       """
