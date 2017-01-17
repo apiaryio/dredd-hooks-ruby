@@ -19,7 +19,6 @@ Feature: Hook handlers
           Hello World!
       """
 
-  @debug
   Scenario:
     Given a file named "hookfile.rb" with:
       """
