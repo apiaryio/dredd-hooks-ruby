@@ -10,7 +10,7 @@ end
 Given(/^server under test is running$/) do
 end
 
-Then(/^It should start listening on localhost port "([^"]*)"$/) do |port|
+Then(/^it should start listening on localhost port "([^"]*)"$/) do |port|
   @client = TCPSocket.new 'localhost', port
   @client.close
 end
