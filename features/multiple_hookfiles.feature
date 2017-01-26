@@ -1,4 +1,4 @@
-Feature: Multiple hookfiles with a glob
+Feature: Multiple hook files with a glob
 
   Background:
     Given I have "dredd-hooks-ruby" command installed
