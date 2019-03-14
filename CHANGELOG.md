@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.3] - 2019-03-14
+
+## Added
+
+- Allow `--host` and `--port` to be set via CLI.
+- Ex: `dredd-hooks-ruby hooks.rb --host 0.0.0.0 --port 12345`
+- See https://github.com/apiaryio/dredd/issues/748#issuecomment-473010416 for more context.
+
 ## [0.1.2] - 2016-12-30
 
 ## Fixed
@@ -41,6 +49,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 The original [proof of concept][poc] was written by @netmilk.
 
 
+[0.1.3]: https://github.com/apiaryio/dredd-hooks-ruby/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/apiaryio/dredd-hooks-ruby/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/apiaryio/dredd-hooks-ruby/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/apiaryio/dredd-hooks-ruby/compare/v0.0.1...v0.1.0

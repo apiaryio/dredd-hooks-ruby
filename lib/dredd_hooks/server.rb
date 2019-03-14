@@ -15,10 +15,15 @@ module DreddHooks
     PORT = 61321
     MESSAGE_DELIMITER = "\n"
 
-    def initialize(error=STDERR, out=STDOUT)
+    def initialize(error=STDERR, out=STDOUT, options={})
       @error = error
       @out = out
-      @server = TCPServer.new(HOST, PORT)
+
+      ## Set host/port if they are passed in through CLI
+      host = options[:host] || HOST
+      port = options[:port] || PORT
+      out.puts "on host:port #{host}:#{port}..."
+      @server = TCPServer.new(host, port)
       @buffer = Buffer.new(MESSAGE_DELIMITER)
       @events_handler = EventsHandler.new
     end

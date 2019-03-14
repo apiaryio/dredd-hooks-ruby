@@ -2,5 +2,18 @@
 $LOAD_PATH.push File.join(File.dirname(__FILE__), "/../lib" )
 
 require 'dredd_hooks/cli'
+require 'optparse'
 
-DreddHooks::CLI.start(ARGV)
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: hooks.rb [options]"
+
+  opts.on("-h", "--host [HOST]", "Pass in host IP") do |host|
+    options[:host] = host
+  end
+  opts.on("-p", "--port [PORT]", Integer, "Pass in port number") do |port|
+    options[:port] = port
+  end
+end.parse!
+
+DreddHooks::CLI.start(options, ARGV)
