@@ -44,7 +44,7 @@ Feature: Multiple hookfiles with a glob
         puts "It's me, File3"
       end
       """
-    When I run `dredd ./apiary.apib http://localhost:4567 --server "ruby server.rb" --language dredd-hooks-ruby --hookfiles ./hookfile1.rb --hookfiles ./hookfile2.rb --hookfiles ./hookfile_*.rb`
+    When I run `dredd ./apiary.apib http://localhost:4567 --server "ruby server.rb" --language dredd-hooks-ruby --hookfiles ./hookfile1.rb --hookfiles ./hookfile2.rb --hookfiles ./hookfile_*.rb --loglevel=debug`
     Then the exit status should be 0
     And the output should contain:
       """

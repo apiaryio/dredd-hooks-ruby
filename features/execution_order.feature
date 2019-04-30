@@ -71,7 +71,7 @@ Feature: Execution order
     Given I set the environment variables to:
       | variable                       | value      |
       | TEST_DREDD_HOOKS_HANDLER_ORDER | true       |
-    When I run `dredd ./apiary.apib http://localhost:4567 --server "ruby server.rb" --language dredd-hooks-ruby --hookfiles ./hookfile.rb`
+    When I run `dredd ./apiary.apib http://localhost:4567 --server "ruby server.rb" --language dredd-hooks-ruby --hookfiles ./hookfile.rb --loglevel=debug`
     Then the exit status should be 0
     And the output should contain:
       """

@@ -28,7 +28,7 @@ Feature: Failing a transaction
         transaction['fail'] = "Yay! Failed in ruby!"
       end
       """
-    When I run `dredd ./apiary.apib http://localhost:4567 --server "ruby server.rb" --language dredd-hooks-ruby --hookfiles ./hookfile.rb`
+    When I run `dredd ./apiary.apib http://localhost:4567 --server "ruby server.rb" --language dredd-hooks-ruby --hookfiles ./hookfile.rb --loglevel=debug`
     Then the exit status should be 1
     And the output should contain:
       """
