@@ -1,7 +1,4 @@
 require "bundler/gem_tasks"
-require "cucumber/rake/task"
-
-Cucumber::Rake::Task.new
 
 begin
   require 'rspec/core/rake_task'
@@ -29,5 +26,5 @@ rescue LoadError
   end
 end
 
-task default: ['spec:public', 'spec:development', :cucumber]
+task default: ['spec:public', 'spec:development']
 
