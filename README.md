@@ -20,7 +20,7 @@ Add the gem to your `Gemfile`:
 ```ruby
 # Gemfile
 
-gem 'dredd_hooks', '0.1.2' # see semver.org
+gem 'dredd_hooks', '0.1.3' # see semver.org
 ```
 
 Usage

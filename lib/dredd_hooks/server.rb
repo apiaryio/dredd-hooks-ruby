@@ -1,3 +1,5 @@
+# frozen_string_literals: true
+
 require 'socket'
 
 require 'dredd_hooks/server/buffer'
@@ -15,10 +17,10 @@ module DreddHooks
     PORT = 61321
     MESSAGE_DELIMITER = "\n"
 
-    def initialize(error=STDERR, out=STDOUT)
+    def initialize(host=HOST, port=PORT, error=STDERR, out=STDOUT)
       @error = error
       @out = out
-      @server = TCPServer.new(HOST, PORT)
+      @server = TCPServer.new(host, port)
       @buffer = Buffer.new(MESSAGE_DELIMITER)
       @events_handler = EventsHandler.new
     end

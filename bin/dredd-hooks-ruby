@@ -1,6 +1,25 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.push File.join(File.dirname(__FILE__), "/../lib" )
 
+require 'optparse'
 require 'dredd_hooks/cli'
 
-DreddHooks::CLI.start(ARGV)
+options = {
+  host: '127.0.0.1',
+  port: 61321
+}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: dredd-hooks-ruby [options] files"
+
+  opts.on('-h', '--host HOST', String, 'The host to listen on (default: 127.0.0.1)') do |h|
+    options[:host] = h
+  end
+
+  opts.on('-p', '--port PORT', Integer, 'The port to listen on (default: 61321)') do |p|
+    options[:port] = p
+  end
+end.parse!
+
+
+DreddHooks::CLI.start(host = options[:host], port = options[:port], ARGV)
