@@ -20,5 +20,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "aruba", "~> 0.14.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "sinatra", "~> 1.4.5"
+  spec.add_development_dependency "sinatra", "~> 2.0.5"
 end
