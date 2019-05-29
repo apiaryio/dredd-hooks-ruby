@@ -33,8 +33,8 @@ GEM
     gherkin (4.0.0)
     multi_json (1.12.1)
     multi_test (0.1.2)
-    rack (1.6.5)
-    rack-protection (1.5.3)
+    rack (1.6.11)
+    rack-protection (1.5.5)
       rack
     rake (10.5.0)
     rspec (3.5.0)
