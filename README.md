@@ -89,9 +89,7 @@ Development
 rake
 ```
 
-A few [Cucumber][cucumber] features provide an end-to-end test harness, and a set of [RSpec][rspec] specs provide both a more granular documentation and a unit test harness.
-
-RSpec [tags][tags] are used to categorize the spec examples.
+A set of [RSpec][rspec] specs provide both a granular documentation and a unit test harness. RSpec [tags][tags] are used to categorize the spec examples.
 
 Spec examples that are tagged as `public` describe aspects of the gem public API, and MAY be considered as its documentation.
 
@@ -99,10 +97,27 @@ The `private` or `protected` specs are written for development purpose only. Bec
 
 Run `rake spec:public` to print the gem public documentation.
 
-  [cucumber]: https://github.com/cucumber/cucumber-rails
+#### Behavioral Spec
+
+A few [Cucumber][cucumber] features from the [dredd-hooks-template] provide an end-to-end test harness. The test suite is provided as a [Node.js] package and needs to be installed by `npm`:
+
+```
+npm install
+```
+
+Then the tests can be ran using the `npm test` command, but for the Ruby paths to be correctly set, an environment variable `BUNDLE_GEMFILE` needs to be set to the path to the `Gemfile`. An example how running the end-to-end tests can look like on macOS:
+
+```
+BUNDLE_GEMFILE=$(pwd)/Gemfile npm test
+```
+
+
+  [cucumber]: https://github.com/cucumber/cucumber-js/
   [rspec]: https://www.relishapp.com/rspec
   [tags]: https://www.relishapp.com/rspec/rspec-core/v/3-4/docs/command-line/tag-option
   [travis]: https://travis-ci.org/gonzalo-bulnes/simple_token_authentication/builds
+  [dredd-hooks-template]: https://github.com/apiaryio/dredd-hooks-template/
+  [Node.js]: https://nodejs.org/en/
 
 ### Maintenance
 

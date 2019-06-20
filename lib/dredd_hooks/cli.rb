@@ -10,6 +10,7 @@ module DreddHooks
 
       # Run the server
       out.puts 'Starting Ruby Dredd Hooks Worker...'
+      out.flush
       server = DreddHooks::Server.new(error, out)
       server.run
     end
