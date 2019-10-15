@@ -17,6 +17,6 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["{bin,doc,lib}/**/*", "CHANGELOG.md", "Gemfile", "LICENSE.txt", "Rakefile", "README.md" ]
   spec.test_files    = Dir["{features,spec}/**/*"]
 
-  spec.add_development_dependency "rake", "~> 12.3"
+  spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
 end
